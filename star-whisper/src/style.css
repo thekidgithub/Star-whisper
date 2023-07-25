@@ -1,0 +1,268 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;    
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #000;
+}
+
+.header{
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    width: 500px;
+    height: 200px;
+    animation: turnup 1s ease-in;
+}
+
+.header h1{
+    color: yellow;
+    font-size: 80px;
+}
+
+.header h3{
+    color: rgb(206, 52, 52);
+    font-size: 40px;
+}
+
+.logo{
+    position: absolute;
+    top: 400px;
+    left: 200px;
+    width: 500px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #fff;
+    animation: turnup 1s ease-in;
+}
+
+@keyframes turnup{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+.signin{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    top: 100px;
+    right: 200px;
+    width: 400px;
+    height: 500px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.signin.hidden ,.login.hidden{
+    display: none;
+}
+
+.signin .title{
+    font-size: 25px;
+    transform: translateX(-120px);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.signin input{
+    width: 300px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px; 
+    padding-left: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.signin .email-verifycode{
+    width: 300px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.email-verifycode #email-verifycode{
+    width: 180px;
+    margin-right: 20px;
+    float: left;
+}
+
+.email-verifycode #get-verifycode{
+    width: 100px;
+    background-color: rgb(254, 254, 47);
+    padding-left: 5px;
+    border: 0;
+    color: #000;
+    float: left;
+}
+
+.signin input::placeholder,.login input::placeholder{
+    font-size: 13px;
+}
+
+.signin input:focus{
+    outline: 0;
+    border: 1px solid rgb(232, 232, 0);
+}
+
+.signin .submit{
+    background-color: rgb(254, 254, 47);
+    border: 0;
+    color: #000;
+}
+
+#get-verifycode:active,.submit:active{
+    transform: scale(0.98);
+}
+
+.signin .gotologin{
+    color: gray;
+    font-size: 12px;
+}
+
+.signin .gotologin a{
+    text-decoration: none;
+}
+
+.signin .gotologin a:active,.signin .gotologin a:visited{
+    color: rgb(0, 0, 238);
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    top: 100px;
+    right: 200px;
+    width: 400px;
+    height: 350px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.login .title{
+    font-size: 25px;
+    transform: translateX(-120px);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.login input{
+    width: 300px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px; 
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding-left: 15px;
+    font-size: 15px;
+}
+
+.login .rem-and-forg{
+    width: 300px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.login .rem-and-forg input{
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 180px;
+}
+
+.login .rem-and-forg label{
+    float: left;
+    font-size: 12px;
+}
+
+.login .rem-and-forg a{
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.login .rem-and-forg a:active,.login .rem-and-forg a:visited{
+    color: rgb(0, 0, 238);
+}
+
+.login .submit{
+    background-color: rgb(254, 254, 47);
+    border: 0;
+    color: #000;
+}
+
+.login .gotosignin{
+    color: gray;
+    font-size: 12px;
+}
+
+.login .gotosignin a{
+    text-decoration: none;
+}
+
+.login .gotosignin a:active,.login .gotosignin a:visited{
+    color: rgb(0, 0, 238);
+}
+
+.login input:focus{
+    outline: 0;
+    border: 1px solid rgb(232, 232, 0);
+}
+
+input.error1,input.error2{
+    border: 1px red solid;
+}
+
+.error-message1{
+    margin-top: -5px;
+    margin-bottom: -5px;
+    transform: translateX(-118px);
+    font-size: 12px;
+    color: red;
+}
+
+.error-message2{
+    margin-top: -5px;
+    margin-bottom: -5px;
+    transform: translateX(-87px);
+    font-size: 12px;
+    color: red;
+}

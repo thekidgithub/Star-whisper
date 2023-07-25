@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="src/download/font_lkky3behvxl/iconfont.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>星语</h1>
+            <h3>Star Whisper</h3>
+        </div>
+        <div class="logo">
+            我是logo
+        </div>
+        <form action="/register" method="post" class="signin">
+            <p class="title">注册</p>
+            <label for="email"></label>
+            <input type="text" id="email" name="email" placeholder="&#xe66f;&nbsp;请输入邮箱" class="iconfont">
+            <div class="email-verifycode">
+                <label for="email-verifycode"></label>
+            <input type="text" id="email-verifycode" name="email-verifycode" placeholder="&#xe63f;&nbsp;请输入邮箱验证码" class="iconfont">
+            <input type="button" name="get-verifycode" id="get-verifycode" value="获取验证码">
+            </div>
+            <label for="username"></label>
+            <input type="text" id="username" name="username" placeholder="&#xe651;&nbsp;请输入昵称" class="iconfont">
+            <label for="password"></label>
+            <input type="password" name="password" id="password" placeholder="&#xe62d;&nbsp;请输入密码" class="iconfont">
+            <label for="password1"></label>
+            <input type="password" name="password1" id="password1" placeholder="&#xe62d;&nbsp;请再次输入密码" class="iconfont">
+            <input type="submit" value="注册" class="submit">
+            <p class="gotologin">已有账号?<a href="#">去登录</a></p>
+        </form>
+
+        <form action="/register" method="post" class="login hidden">
+            <p class="title">登录</p>
+            <label for="email1"></label>
+            <input type="text" id="email1" name="email1" placeholder="&#xe66f;&nbsp;请输入邮箱" class="iconfont">
+            <label for="password1"></label>
+            <input type="password" name="password2" id="password2" placeholder="&#xe62d;&nbsp;请输入密码" class="iconfont">
+            <div class="rem-and-forg">
+                <label for="rem-me">记住我</label>
+                <input type="checkbox" id="rem-me" name="rem-me">
+                <a href="#" class="forget">忘记密码？</a>
+            </div>
+            <input type="submit" value="登录" class="submit">
+            <p class="gotosignin">没有账号?<a href="#">注册一个</a></p>
+        </form>
+        <script src="src/script.js"></script>
+    </div>
+</body>
+</html>
