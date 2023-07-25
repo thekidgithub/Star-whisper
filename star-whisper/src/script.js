@@ -41,7 +41,7 @@ signinSubmit.addEventListener('click',(e)=>{
     testEmail1();
     testUsername();
     if(testPassword()&&testPasswordAgain()&&testEmail1()&&testUsername()){
-        $ajax({
+        $.ajax({
             method:"post",
             url:"/u/register",
             dataType:"json",
@@ -51,18 +51,15 @@ signinSubmit.addEventListener('click',(e)=>{
                 username:username,
                 password:password,
             },
-            success:function(result, textStatus, jqXHR){
+            success:function(result){
                 const res = JSON.parse(result);
                 if(res.success){
-                    alert("注册成功！")
+                    alert("注册成功！");
                 }
                 else{
-                    const status = jqXHR.status;
-                    if(status === 403) verifyCodeError();
-                    else if(status === 400){
-                        if(res.error.includes('email')) emailError();
-                        if(res.error.includes('username')) usernameError();
-                    } 
+                    if(res.error.includes('verifycode')) verifyCodeError();
+                    if(res.error.includes('email')) emailError();
+                    if(res.error.includes('username')) usernameError();
                 }
             },
             error:function(msg){
@@ -73,9 +70,34 @@ signinSubmit.addEventListener('click',(e)=>{
 })
 
 loginSubmit.addEventListener('click',(e)=>{
-    e.preventDefault();
+    const email = emailInput1.value.trim();
+    const password = passwordInput1.value.trim();
     testEmail2();
     testPassword1();
+    if(testEmail2()&&testPassword1()){
+        $.ajax({
+            method:"post",
+            url:"/u/login",
+            dataType:"json",
+            data:{
+                email:email,
+                password:password,
+            },
+            success:function(result){
+                const res = JSON.parse(result);
+                if(res.success){
+                    alert("登录成功！");
+                }
+                else{
+                    if(res.error.includes('email')) emailError1();
+                    if(res.error.includes('password')) passwordError();
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        })
+    }
 })
 
 function testEmail() {
@@ -105,7 +127,7 @@ function testEmail() {
         emailInput.parentNode.insertBefore(errorMessage2, emailInput.nextSibling);
     }
     else {
-        $ajax({
+        $.ajax({
             method : "post",
             url : "/u/send_code",
             dataType : "json",
@@ -310,14 +332,20 @@ function testEmail2(){
         errorMessage9.innerText = "请输入邮箱";
         emailInput1.parentNode.insertBefore(errorMessage9, emailInput1.nextSibling);
     }
-    else if (/**/1 === 0) {
-        emailInput1.classList.add('error');
-        const errorMessage10 = document.createElement("p");
-        errorMessage10.classList.add('error-message10');
-        errorMessage10.innerText = "用户不存在";
-        emailInput1.parentNode.insertBefore(errorMessage10, emailInput1.nextSibling);
-    }
     else return 1;
+}
+
+function emailError1(){
+    emailInput1.classList.remove("error");
+    const error10 = emailInput1.parentNode.querySelector(".error-message10");
+    if (error10) {
+        emailInput1.parentNode.removeChild(error10);
+    }
+    emailInput1.classList.add('error');
+    const errorMessage10 = document.createElement("p");
+    errorMessage10.classList.add('error-message10');
+    errorMessage10.innerText = "邮箱用户不存在";
+    emailInput1.parentNode.insertBefore(errorMessage10, emailInput1.nextSibling);
 }
 
 function testPassword1(){
@@ -338,12 +366,18 @@ function testPassword1(){
         errorMessage11.innerText = "请输入密码";
         passwordInput1.parentNode.insertBefore(errorMessage11, passwordInput1.nextSibling);
     }
-    else if(/**/1 === 0){
-        passwordInput1.classList.add('error');
-        const errorMessage12 = document.createElement('p');
-        errorMessage12.classList.add('error-message12');
-        errorMessage12.innerText = "密码格式不正确";
-        passwordInput1.parentNode.insertBefore(errorMessage12, passwordInput1.nextSibling);
-    }
     else return 1;
+}
+
+function passwordError(){
+    passwordInput1.classList.remove('error');
+    const error12 = passwordInput1.parentNode.querySelector(".error-message12");
+    if(error12){
+        passwordInput1.parentNode.removeChild(error12);
+    }
+    passwordInput1.classList.add('error');
+    const errorMessage12 = document.createElement('p');
+    errorMessage12.classList.add('error-message12');
+    errorMessage12.innerText = "密码错误";
+    passwordInput1.parentNode.insertBefore(errorMessage12, passwordInput1.nextSibling);
 }
