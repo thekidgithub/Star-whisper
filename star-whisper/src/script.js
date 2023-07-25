@@ -69,7 +69,7 @@ signinSubmit.addEventListener('click',(e)=>{
                 console.log(msg);
             }
         })*/
-        $.post("8.140.204.13:7700/u/register", JSON.stringify({
+        $.post("60.204.203.164:7700/u/register", JSON.stringify({
             email: email,
             verifyCode: verifyCode,
             username: username,
@@ -117,7 +117,7 @@ loginSubmit.addEventListener('click',(e)=>{
                 console.log(msg);
             }
         })*/
-        $.post("8.140.204.13:7700/u/login", JSON.stringify({
+        $.post("60.204.203.164:7700/u/login", JSON.stringify({
             email: email,
             password: password,
           }), function (res) {
@@ -181,7 +181,7 @@ function testEmail() {
                 console.log(msg);
             }
         });*/
-        $.post("8.140.204.13:7700/u/send_code", JSON.stringify({
+        $.post("60.204.203.164:7700/u/send_code", JSON.stringify({
             email: email,
           }), function (res) {
             if (res.success) {
