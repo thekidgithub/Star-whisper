@@ -32,12 +32,44 @@ getVerifyCode.addEventListener('click', () => {
 });
 
 signinSubmit.addEventListener('click',(e)=>{
-    e.preventDefault();
-    testEmail1();
-    testVerifyCode();
-    testUsername();
+    const email = emailInput.value.trim();
+    const verifyCode = verifyCodeInput.value.trim();
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
     testPassword();
     testPasswordAgain();
+    testEmail1();
+    testUsername();
+    if(testPassword()&&testPasswordAgain()&&testEmail1()&&testUsername()){
+        $ajax({
+            method:"post",
+            url:"/u/register",
+            dataType:"json",
+            data:{
+                email:email,
+                verifyCode:verifyCode,
+                username:username,
+                password:password,
+            },
+            success:function(result, textStatus, jqXHR){
+                const res = JSON.parse(result);
+                if(res.success){
+                    alert("注册成功！")
+                }
+                else{
+                    const status = jqXHR.status;
+                    if(status === 403) verifyCodeError();
+                    else if(status === 400){
+                        if(res.error.includes('email')) emailError();
+                        if(res.error.includes('username')) usernameError();
+                    } 
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        })
+    }
 })
 
 loginSubmit.addEventListener('click',(e)=>{
@@ -73,16 +105,26 @@ function testEmail() {
         emailInput.parentNode.insertBefore(errorMessage2, emailInput.nextSibling);
     }
     else {
-        emailInput.classList.remove("error");
-        emailInput.classList.remove("error");
-        const errorMessage1 = emailInput.parentNode.querySelector(".error-message1");
-        if (errorMessage1) {
-            emailInput.parentNode.removeChild(errorMessage1);
-        }
-        const errorMessage2 = emailInput.parentNode.querySelector(".error-mssage2");
-        if (errorMessage2) {
-            emailInput.parentNode.removeChild(errorMessage2);
-        }
+        $ajax({
+            method : "post",
+            url : "/u/send_code",
+            dataType : "json",
+            data : {
+                email:email,
+            },
+            success : function(result){
+                const res = JSON.parse(result);
+                if(res.success){
+                    alert(res.data);
+                }
+                else{
+                    console.log(res.error);
+                }
+            },
+            error : function(msg){
+                console.log(msg);
+            }
+        });
         if (countdown === 60) {
             setTimeout(() => {
                 getVerifyCode.classList.add('countdown');
@@ -104,7 +146,6 @@ function testEmail() {
 
 function testEmail1(){
     const email = emailInput.value.trim();
-    emailInput.classList.remove("error");
     emailInput.classList.remove("error");
     const errorMessage1 = emailInput.parentNode.querySelector(".error-message1");
     if (errorMessage1) {
@@ -131,6 +172,19 @@ function testEmail1(){
     else return 1;
 }
 
+function emailError(){
+    emailInput.classList.remove("error");
+    const error13 = emailInput.parentNode.querySelector(".error-message13");
+    if (error13) {
+        emailInput.parentNode.removeChild(error13);
+    }
+    emailInput.classList.add('error');
+    const errorMessage13 = document.createElement("p");
+    errorMessage13.classList.add('error-message13');
+    errorMessage13.innerText = "邮箱已存在";
+    emailInput.parentNode.insertBefore(errorMessage13, emailInput.nextSibling);
+}
+
 function testVerifyCode(){
     const verifyCode = verifyCodeInput.value.trim();
     verifyCodeInput.classList.remove("error");
@@ -138,14 +192,27 @@ function testVerifyCode(){
     if(errorMessage3){
         verifyCodeInput.parentNode.parentNode.removeChild(errorMessage3);
     }
-    if(/*verifyCode !== verifyCodeSupplied*/ 1 === 1){
+    if(verifyCode === ''){
         verifyCodeInput.classList.add('error');
         const errorMessage3 = document.createElement("p");
         errorMessage3.classList.add('error-message3');
-        errorMessage3.innerText = "验证码错误";
+        errorMessage3.innerText = "请输入验证码";
         emailInput.parentNode.insertBefore(errorMessage3, verifyCodeInput1.nextSibling);
     }
     else return 1;
+}
+
+function verifyCodeError(){
+    verifyCodeInput.classList.remove("error");
+    const error14 = verifyCodeInput.parentNode.parentNode.querySelector(".error-message14");
+    if(errorMessage14){
+        verifyCodeInput.parentNode.parentNode.removeChild(errorMessage14);
+    }
+    verifyCodeInput.classList.add('error');
+    const errorMessage14 = document.createElement("p");
+    errorMessage14.classList.add('error-message14');
+    errorMessage14.innerText = "验证码错误";
+    emailInput.parentNode.insertBefore(errorMessage14, verifyCodeInput1.nextSibling);
 }
 
 function testUsername(){
@@ -155,10 +222,7 @@ function testUsername(){
     if(errorMessage4){
         usernameInput.parentNode.removeChild(errorMessage4);
     }
-    const errorMessage5 = usernameInput.parentNode.querySelector(".error-message5");
-    if(errorMessage5){
-        usernameInput.parentNode.removeChild(errorMessage5);
-    }
+    
     if(username === ''){
         usernameInput.classList.add('error');
         const errorMessage4 = document.createElement('p');
@@ -166,14 +230,20 @@ function testUsername(){
         errorMessage4.innerText = "请输入用户名";
         usernameInput.parentNode.insertBefore(errorMessage4, usernameInput.nextSibling);
     }
-    else if(/*用户名已存在*/1 === 0){
-        usernameInput.classList.add('error');
-        const errorMessage5 = document.createElement('p');
-        errorMessage5.classList.add('error-message4');
-        errorMessage5.innerText = "用户名已存在";
-        usernameInput.parentNode.insertBefore(errorMessage5, usernameInput.nextSibling);
-    }
     else return 1;
+}
+
+function usernameError(){
+    usernameInput.classList.remove('error');
+    const error5 = usernameInput.parentNode.querySelector(".error-message5");
+    if(error5){
+        usernameInput.parentNode.removeChild(error5);
+    }
+    usernameInput.classList.add('error');
+    const errorMessage5 = document.createElement('p');
+    errorMessage5.classList.add('error-message5');
+    errorMessage5.innerText = "用户名已存在";
+    usernameInput.parentNode.insertBefore(errorMessage5, usernameInput.nextSibling);
 }
 
 function testPassword(){
