@@ -8,7 +8,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;    
+    height: 100vh;   
+    background-color: #000;
+}
+
+:root{
+    --blue1:#5968ba;
+    --blue2:#491bff;
 }
 
 .iconfont {
@@ -23,63 +29,24 @@ body{
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: #000;
+    background-image: url(../images/background.svg);
+    background-repeat: no-repeat;
 }
 
-.header{
-    position: absolute;
-    top: 100px;
-    left: 200px;
-    width: 500px;
-    height: 200px;
-    animation: turnup 1s ease-in;
-}
-
-.header h1{
-    color: yellow;
-    font-size: 80px;
-}
-
-.header h3{
-    color: rgb(206, 52, 52);
-    font-size: 40px;
-}
-
-.logo{
-    position: absolute;
-    top: 400px;
-    left: 200px;
-    width: 500px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    color: #fff;
-    animation: turnup 1s ease-in;
-}
-
-@keyframes turnup{
-    0%{
-        opacity: 0;
-    }
-
-    100%{
-        opacity: 1;
-    }
-}
 .signin{
     display: flex;
     position: absolute;
+    right: 0;
+    width: 40%;
+    height: 100%;
     flex-direction: column;
-    align-items: center;
-    top: 100px;
-    right: 200px;
-    width: 400px;
-    height: 500px;
     padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
+}
+
+.signin label{
+    font-size: 12px;
+    color: var(--blue1);
+    transform: translateY(-10px);
 }
 
 .signin.hidden ,.login.hidden{
@@ -87,43 +54,46 @@ body{
 }
 
 .signin .title{
-    font-size: 25px;
-    transform: translateX(-120px);
+    font-size: 35px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
+    color: var(--blue1);
 }
 
 .signin input{
-    width: 300px;
-    height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    background-color: #000;
+    color: #fff;
+    width: 400px;
+    height: 50px;
+    margin-bottom: 42px;
     padding: 5px; 
+    border: 1px #fff solid;
+    border-radius: 10px;
     padding-left: 15px;
-    border: 1px solid gray;
-    border-radius: 5px;
     font-size: 15px;
 }
 
 .signin .email-verifycode{
-    width: 300px;
-    height: 40px;
-    margin-bottom: 20px;
+    width: 400x;
+    height: 60px;
+    margin-bottom: 34px;
 }
 
 .email-verifycode #email-verifycode{
-    width: 180px;
-    margin-right: 20px;
+    width: 300px;
+    border-radius: 10px 0 0 10px;
+    border-right: 0;
     float: left;
 }
 
 .email-verifycode #get-verifycode{
     width: 100px;
-    background-color: rgb(254, 254, 47);
+    border-radius: 0 10px 10px 0;
+    background-color: var(--blue2);
     padding-left: 5px;
     font-size: 13px;
     border: 0;
-    color: #000;
+    color: #fff;
     float: left;
 }
 
@@ -138,22 +108,23 @@ body{
 
 .signin input:focus{
     outline: 0;
-    border: 1px solid rgb(232, 232, 0);
+    border: 1px solid var(--blue2);
 }
 
 .signin .signinsubmit{
-    background-color: rgb(254, 254, 47);
+    background-color: var(--blue2);
     border: 0;
-    color: #000;
+    color: #fff;
 }
 
-#get-verifycode:active,.submit:active{
+#get-verifycode:active,.signinsubmit:active{
     transform: scale(0.98);
 }
 
 .signin .gotologin{
     color: gray;
-    font-size: 12px;
+    font-size: 14px;
+    transform: translateY(-20px);
 }
 
 .signin .gotologin a{
@@ -170,74 +141,52 @@ body{
     display: flex;
     position: absolute;
     flex-direction: column;
-    align-items: center;
-    top: 100px;
-    right: 200px;
-    width: 400px;
-    height: 350px;
+    top: 15%;
+    right: 10%;
     padding: 30px;
-    background-color: #fff;
     border-radius: 10px;
 }
 
 .login .title{
-    font-size: 25px;
-    transform: translateX(-120px);
+    font-size: 35px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
+    color: var(--blue1);
 }
 
 .login input{
-    width: 300px;
-    height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    background-color: #000;
+    color: #fff;
+    width: 400px;
+    height: 50px;
+    margin-bottom: 42px;
     padding: 5px; 
-    border: 1px solid gray;
-    border-radius: 5px;
+    border: 1px #fff solid;
+    border-radius: 10px;
     padding-left: 15px;
     font-size: 15px;
 }
 
-.login .rem-and-forg{
-    width: 300px;
-    height: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.login .rem-and-forg input{
-    width: 12px;
-    height: 12px;
-    float: left;
-    margin-left: 5px;
-    margin-right: 180px;
-}
-
-.login .rem-and-forg label{
-    float: left;
+.login label{
     font-size: 12px;
+    color: var(--blue1);
+    transform: translateY(-10px);
 }
 
-.login .rem-and-forg a{
-    display: block;
-    font-size: 12px;
-    text-decoration: none;
-}
-
-.login .rem-and-forg a:active,.login .rem-and-forg a:visited{
-    color: rgb(0, 0, 238);
-}
-
-.login .submit{
-    background-color: rgb(254, 254, 47);
+.login .loginsubmit{
+    background-color: var(--blue2);
     border: 0;
-    color: #000;
+    color: #fff;
+}
+
+.login .loginsubmit:active{
+    transform: scale(0.98);
 }
 
 .login .gotosignin{
     color: gray;
-    font-size: 12px;
+    font-size: 14px;
+    transform: translateY(-10px);
 }
 
 .login .gotosignin a{
@@ -250,50 +199,17 @@ body{
 
 .login input:focus{
     outline: 0;
-    border: 1px solid rgb(232, 232, 0);
+    border: 1px solid var(--blue2);
 }
 
 input.error{
     border: 1px red solid;
 }
 
-.error-message1,.error-message3,.error-message6,.error-message8{
+p[class^="error-message"]{
     margin-top: -5px;
     margin-bottom: -5px;
-    transform: translateX(-118px);
-    font-size: 12px;
-    color: red;
-}
-
-.error-message2{
-    margin-top: -5px;
-    margin-bottom: -5px;
-    transform: translateX(-87px);
-    font-size: 12px;
-    color: red;
-}
-
-.error-message3{
-    margin-top: -5px;
-    margin-bottom: -5px;
-    transform: translateX(-30px);
-    transform: translateY(-7px);
-    font-size: 12px;
-    color: red;
-}
-
-.error-message4,.error-message5{
-    margin-top: -5px;
-    margin-bottom: -5px;
-    transform: translateX(-115px);
-    font-size: 12px;
-    color: red;
-}
-
-.error-message7{
-    margin-top: -5px;
-    margin-bottom: -5px;
-    transform: translateX(-110px);
+    transform: translateY(-25px);
     font-size: 12px;
     color: red;
 }

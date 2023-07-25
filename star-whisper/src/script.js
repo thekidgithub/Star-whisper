@@ -5,11 +5,14 @@ const login = document.querySelector('.login');
 const getVerifyCode = document.querySelector('#get-verifycode');
 const emailInput = document.querySelector('#email');
 const signinSubmit = document.querySelector('.signinsubmit');
+const verifyCodeInput1 = document.querySelector(".email-verifycode")
 const verifyCodeInput = document.querySelector('#email-verifycode');
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
 const passwordAgainInput = document.querySelector('#password1');
-
+const emailInput1 = document.querySelector("#email1");
+const passwordInput1 = document.querySelector('#password2');
+const loginSubmit = document.querySelector('.loginsubmit');
 const emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 let countdown = 60;
@@ -35,6 +38,12 @@ signinSubmit.addEventListener('click',(e)=>{
     testUsername();
     testPassword();
     testPasswordAgain();
+})
+
+loginSubmit.addEventListener('click',(e)=>{
+    e.preventDefault();
+    testEmail2();
+    testPassword1();
 })
 
 function testEmail() {
@@ -125,16 +134,16 @@ function testEmail1(){
 function testVerifyCode(){
     const verifyCode = verifyCodeInput.value.trim();
     verifyCodeInput.classList.remove("error");
-    const errorMessage3 = verifyCodeInput.parentNode.querySelector(".error-message3");
+    const errorMessage3 = verifyCodeInput.parentNode.parentNode.querySelector(".error-message3");
     if(errorMessage3){
-        verifyCodeInput.parentNode.removeChild(errorMessage3);
+        verifyCodeInput.parentNode.parentNode.removeChild(errorMessage3);
     }
     if(/*verifyCode !== verifyCodeSupplied*/ 1 === 1){
         verifyCodeInput.classList.add('error');
         const errorMessage3 = document.createElement("p");
         errorMessage3.classList.add('error-message3');
         errorMessage3.innerText = "验证码错误";
-        verifyCodeInput.parentNode.insertBefore(errorMessage3, getVerifyCode.nextSibling);
+        emailInput.parentNode.insertBefore(errorMessage3, verifyCodeInput1.nextSibling);
     }
     else return 1;
 }
@@ -209,6 +218,62 @@ function testPasswordAgain(){
         errorMessage8.classList.add('error-message8');
         errorMessage8.innerText = "密码不一致";
         passwordAgainInput.parentNode.insertBefore(errorMessage8, passwordAgainInput.nextSibling);
+    }
+    else return 1;
+}
+
+function testEmail2(){
+    const email = emailInput1.value.trim();
+    emailInput1.classList.remove("error");
+    const errorMessage9 = emailInput1.parentNode.querySelector(".error-message9");
+    if (errorMessage9) {
+        emailInput1.parentNode.removeChild(errorMessage9);
+    }
+    const errorMessage10 = emailInput1.parentNode.querySelector(".error-message10");
+    if (errorMessage10) {
+        emailInput1.parentNode.removeChild(errorMessage10);
+    }
+    if (!email) {
+        emailInput1.classList.add('error');
+        const errorMessage9 = document.createElement("p");
+        errorMessage9.classList.add('error-message9');
+        errorMessage9.innerText = "请输入邮箱";
+        emailInput1.parentNode.insertBefore(errorMessage9, emailInput1.nextSibling);
+    }
+    else if (/**/1 === 0) {
+        emailInput1.classList.add('error');
+        const errorMessage10 = document.createElement("p");
+        errorMessage10.classList.add('error-message10');
+        errorMessage10.innerText = "用户不存在";
+        emailInput1.parentNode.insertBefore(errorMessage10, emailInput1.nextSibling);
+    }
+    else return 1;
+}
+
+function testPassword1(){
+    const password = passwordInput1.value.trim();
+    passwordInput1.classList.remove('error');
+    const errorMessage11 = passwordInput1.parentNode.querySelector(".error-message11");
+    if(errorMessage11){
+        passwordInput1.parentNode.removeChild(errorMessage11);
+    }
+    const errorMessage12 = passwordInput1.parentNode.querySelector(".error-message12");
+    if(errorMessage12){
+        passwordInput1.parentNode.removeChild(errorMessage12);
+    }
+    if(password === ''){
+        passwordInput1.classList.add('error');
+        const errorMessage11 = document.createElement('p');
+        errorMessage11.classList.add('error-message11');
+        errorMessage11.innerText = "请输入密码";
+        passwordInput1.parentNode.insertBefore(errorMessage11, passwordInput1.nextSibling);
+    }
+    else if(/**/1 === 0){
+        passwordInput1.classList.add('error');
+        const errorMessage12 = document.createElement('p');
+        errorMessage12.classList.add('error-message12');
+        errorMessage12.innerText = "密码格式不正确";
+        passwordInput1.parentNode.insertBefore(errorMessage12, passwordInput1.nextSibling);
     }
     else return 1;
 }
