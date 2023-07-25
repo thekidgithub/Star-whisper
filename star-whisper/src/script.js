@@ -42,14 +42,17 @@ signinSubmit.addEventListener('click',(e)=>{
     testUsername();
     if(testPassword()&&testPasswordAgain()&&testEmail1()&&testUsername()){
         $.ajax({
-            method:"post",
-            url:"/u/register",
+            method:"POST",
+            url:"8.140.204.13:7700/u/register",
             dataType:"json",
             data:{
                 email:email,
                 verifyCode:verifyCode,
                 username:username,
                 password:password,
+            },
+            headers: {
+                "Content-Type": "application/json",
             },
             success:function(result){
                 const res = JSON.parse(result);
@@ -66,6 +69,20 @@ signinSubmit.addEventListener('click',(e)=>{
                 console.log(msg);
             }
         })
+    /*    $.post("8.140.204.13:7700/u/register", JSON.stringify({
+            email: email,
+            verifyCode: verifyCode,
+            username: username,
+            password: password,
+          }), function (res) {
+            if (res.success) {
+              alert("注册成功！");
+            } else {
+              if (res.error.includes("verifycode")) verifyCodeError();
+              if (res.error.includes("email")) emailError();
+              if (res.error.includes("username")) usernameError();
+            }
+          }, "json");*/
     }
 })
 
@@ -76,12 +93,15 @@ loginSubmit.addEventListener('click',(e)=>{
     testPassword1();
     if(testEmail2()&&testPassword1()){
         $.ajax({
-            method:"post",
-            url:"/u/login",
+            method:"POST",
+            url:"8.140.204.13:7700/u/login",
             dataType:"json",
             data:{
                 email:email,
                 password:password,
+            },
+            headers: {
+                "Content-Type": "application/json",
             },
             success:function(result){
                 const res = JSON.parse(result);
@@ -97,6 +117,17 @@ loginSubmit.addEventListener('click',(e)=>{
                 console.log(msg);
             }
         })
+       /* $.post("8.140.204.13:7700/u/login", JSON.stringify({
+            email: email,
+            password: password,
+          }), function (res) {
+            if (res.success) {
+              alert("登录成功！");
+            } else {
+              if (res.error.includes("email")) emailError1();
+              if (res.error.includes("password")) passwordError();
+            }
+          }, "json");*/
     }
 })
 
@@ -128,11 +159,14 @@ function testEmail() {
     }
     else {
         $.ajax({
-            method : "post",
-            url : "/u/send_code",
+            method : "POST",
+            url : "8.140.204.13:7700/u/send_code",
             dataType : "json",
             data : {
                 email:email,
+            },
+            headers: {
+                "Content-Type": "application/json",
             },
             success : function(result){
                 const res = JSON.parse(result);
@@ -147,6 +181,15 @@ function testEmail() {
                 console.log(msg);
             }
         });
+        /*$.post("8.140.204.13:7700/u/send_code", JSON.stringify({
+            email: email,
+          }), function (res) {
+            if (res.success) {
+              alert(res.data);
+            } else {
+              console.log(res.error);
+            }
+          }, "json");*/
         if (countdown === 60) {
             setTimeout(() => {
                 getVerifyCode.classList.add('countdown');
