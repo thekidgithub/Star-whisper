@@ -41,7 +41,7 @@ signinSubmit.addEventListener('click',(e)=>{
     testEmail1();
     testUsername();
     if(testPassword()&&testPasswordAgain()&&testEmail1()&&testUsername()){
-        $.ajax({
+     /*   $.ajax({
             method:"POST",
             url:"8.140.204.13:7700/u/register",
             dataType:"json",
@@ -68,8 +68,8 @@ signinSubmit.addEventListener('click',(e)=>{
             error:function(msg){
                 console.log(msg);
             }
-        })
-    /*    $.post("8.140.204.13:7700/u/register", JSON.stringify({
+        })*/
+        $.post("8.140.204.13:7700/u/register", JSON.stringify({
             email: email,
             verifyCode: verifyCode,
             username: username,
@@ -82,7 +82,7 @@ signinSubmit.addEventListener('click',(e)=>{
               if (res.error.includes("email")) emailError();
               if (res.error.includes("username")) usernameError();
             }
-          }, "json");*/
+          }, "json");
     }
 })
 
@@ -92,7 +92,7 @@ loginSubmit.addEventListener('click',(e)=>{
     testEmail2();
     testPassword1();
     if(testEmail2()&&testPassword1()){
-        $.ajax({
+     /*   $.ajax({
             method:"POST",
             url:"8.140.204.13:7700/u/login",
             dataType:"json",
@@ -116,8 +116,8 @@ loginSubmit.addEventListener('click',(e)=>{
             error:function(msg){
                 console.log(msg);
             }
-        })
-       /* $.post("8.140.204.13:7700/u/login", JSON.stringify({
+        })*/
+        $.post("8.140.204.13:7700/u/login", JSON.stringify({
             email: email,
             password: password,
           }), function (res) {
@@ -127,7 +127,7 @@ loginSubmit.addEventListener('click',(e)=>{
               if (res.error.includes("email")) emailError1();
               if (res.error.includes("password")) passwordError();
             }
-          }, "json");*/
+          }, "json");
     }
 })
 
@@ -158,7 +158,7 @@ function testEmail() {
         emailInput.parentNode.insertBefore(errorMessage2, emailInput.nextSibling);
     }
     else {
-        $.ajax({
+     /*   $.ajax({
             method : "POST",
             url : "8.140.204.13:7700/u/send_code",
             dataType : "json",
@@ -180,8 +180,8 @@ function testEmail() {
             error : function(msg){
                 console.log(msg);
             }
-        });
-        /*$.post("8.140.204.13:7700/u/send_code", JSON.stringify({
+        });*/
+        $.post("8.140.204.13:7700/u/send_code", JSON.stringify({
             email: email,
           }), function (res) {
             if (res.success) {
@@ -189,7 +189,7 @@ function testEmail() {
             } else {
               console.log(res.error);
             }
-          }, "json");*/
+          }, "json");
         if (countdown === 60) {
             setTimeout(() => {
                 getVerifyCode.classList.add('countdown');
