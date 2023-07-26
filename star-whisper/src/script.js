@@ -45,12 +45,12 @@ signinSubmit.addEventListener('click', (e) => {
                method:"POST",
                url:"http://60.204.203.164:7700/u/register",
                dataType:"json",
-               data:{
+               data:JSON.stringify({
                    email:email,
                    verifyCode:verifyCode,
                    username:username,
                    password:password,
-               },
+               }),
                headers: {
                    "Content-Type": "application/json",
                },
@@ -96,10 +96,10 @@ loginSubmit.addEventListener('click', (e) => {
                method:"POST",
                url:"http://60.204.203.164:7700/u/login",
                dataType:"json",
-               data:{
+               data:JSON.stringify({
                    email:email,
                    password:password,
-               },
+               }),
                headers: {
                    "Content-Type": "application/json",
                },
@@ -162,9 +162,9 @@ function testEmail() {
             method: "POST",
             url: "http://60.204.203.164:7700/u/send_code",
             dataType: "json",
-            data: {
+            data: JSON.stringify({
                 email: email,
-            },
+            }),
             headers: {
                 "Content-Type": "application/json",
             },
