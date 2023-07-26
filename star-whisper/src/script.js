@@ -32,6 +32,7 @@ getVerifyCode.addEventListener('click', () => {
 });
 
 signinSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
     const email = emailInput.value.trim();
     const verifyCode = verifyCodeInput.value.trim();
     const username = usernameInput.value.trim();
@@ -87,6 +88,7 @@ signinSubmit.addEventListener('click', (e) => {
 })
 
 loginSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
     const email = emailInput1.value.trim();
     const password = passwordInput1.value.trim();
     testEmail2();
