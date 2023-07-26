@@ -56,14 +56,13 @@ signinSubmit.addEventListener('click', (e) => {
                    "Content-Type": "application/json",
                },
                success:function(result){
-                   const res = JSON.parse(result);
-                   if(res.success){
+                   if(result.success){
                        alert("注册成功！");
                    }
                    else{
-                       if(res.error.includes('verifycode')) verifyCodeError();
-                       if(res.error.includes('email')) emailError();
-                       if(res.error.includes('username')) usernameError();
+                       if(result.error.includes('verifycode')) verifyCodeError();
+                       if(result.error.includes('email')) emailError();
+                       if(result.error.includes('username')) usernameError();
                    }
                },
                error:function(msg){
@@ -106,13 +105,12 @@ loginSubmit.addEventListener('click', (e) => {
                    "Content-Type": "application/json",
                },
                success:function(result){
-                   const res = JSON.parse(result);
-                   if(res.success){
+                   if(result.success){
                        alert("登录成功！");
                    }
                    else{
-                       if(res.error.includes('email')) emailError1();
-                       if(res.error.includes('password')) passwordError();
+                       if(result.error.includes('email')) emailError1();
+                       if(result.error.includes('password')) passwordError();
                    }
                },
                error:function(msg){
@@ -171,12 +169,11 @@ function testEmail() {
                 "Content-Type": "application/json",
             },
             success: function (result) {
-                const res = JSON.parse(result);
-                if (res.success) {
-                    alert(res.data);
+                if (result.success) {
+                    alert(result.data);
                 }
                 else {
-                    console.log(res.error);
+                    console.log(result.error);
                 }
             },
             error: function (msg) {
