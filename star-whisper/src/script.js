@@ -31,7 +31,7 @@ getVerifyCode.addEventListener('click', () => {
     testEmail();
 });
 
-signinSubmit.addEventListener('click',(e)=>{
+signinSubmit.addEventListener('click', (e) => {
     const email = emailInput.value.trim();
     const verifyCode = verifyCodeInput.value.trim();
     const username = usernameInput.value.trim();
@@ -40,94 +40,94 @@ signinSubmit.addEventListener('click',(e)=>{
     testPasswordAgain();
     testEmail1();
     testUsername();
-    if(testPassword()&&testPasswordAgain()&&testEmail1()&&testUsername()){
-     /*   $.ajax({
-            method:"POST",
-            url:"8.140.204.13:7700/u/register",
-            dataType:"json",
-            data:{
-                email:email,
-                verifyCode:verifyCode,
-                username:username,
-                password:password,
-            },
-            headers: {
-                "Content-Type": "application/json",
-            },
-            success:function(result){
-                const res = JSON.parse(result);
-                if(res.success){
-                    alert("注册成功！");
-                }
-                else{
-                    if(res.error.includes('verifycode')) verifyCodeError();
-                    if(res.error.includes('email')) emailError();
-                    if(res.error.includes('username')) usernameError();
-                }
-            },
-            error:function(msg){
-                console.log(msg);
-            }
-        })*/
-        $.post("60.204.203.164:7700/u/register", JSON.stringify({
+    if (testPassword() && testPasswordAgain() && testEmail1() && testUsername()) {
+           $.ajax({
+               method:"POST",
+               url:"http://60.204.203.164:7700/u/register",
+               dataType:"json",
+               data:{
+                   email:email,
+                   verifyCode:verifyCode,
+                   username:username,
+                   password:password,
+               },
+               headers: {
+                   "Content-Type": "application/json",
+               },
+               success:function(result){
+                   const res = JSON.parse(result);
+                   if(res.success){
+                       alert("注册成功！");
+                   }
+                   else{
+                       if(res.error.includes('verifycode')) verifyCodeError();
+                       if(res.error.includes('email')) emailError();
+                       if(res.error.includes('username')) usernameError();
+                   }
+               },
+               error:function(msg){
+                   console.log(msg);
+               }
+           })
+       /* $.post("http://60.204.203.164:7700/u/register", JSON.stringify({
             email: email,
             verifyCode: verifyCode,
             username: username,
             password: password,
-          }), function (res) {
+        }), function (res) {
             if (res.success) {
-              alert("注册成功！");
+                alert("注册成功！");
             } else {
-              if (res.error.includes("verifycode")) verifyCodeError();
-              if (res.error.includes("email")) emailError();
-              if (res.error.includes("username")) usernameError();
+                if (res.error.includes("verifycode")) verifyCodeError();
+                if (res.error.includes("email")) emailError();
+                if (res.error.includes("username")) usernameError();
             }
-          }, "json");
+        }, "json");*/
     }
 })
 
-loginSubmit.addEventListener('click',(e)=>{
+loginSubmit.addEventListener('click', (e) => {
     const email = emailInput1.value.trim();
     const password = passwordInput1.value.trim();
     testEmail2();
     testPassword1();
-    if(testEmail2()&&testPassword1()){
-     /*   $.ajax({
-            method:"POST",
-            url:"8.140.204.13:7700/u/login",
-            dataType:"json",
-            data:{
-                email:email,
-                password:password,
-            },
-            headers: {
-                "Content-Type": "application/json",
-            },
-            success:function(result){
-                const res = JSON.parse(result);
-                if(res.success){
-                    alert("登录成功！");
-                }
-                else{
-                    if(res.error.includes('email')) emailError1();
-                    if(res.error.includes('password')) passwordError();
-                }
-            },
-            error:function(msg){
-                console.log(msg);
-            }
-        })*/
-        $.post("60.204.203.164:7700/u/login", JSON.stringify({
+    if (testEmail2() && testPassword1()) {
+           $.ajax({
+               method:"POST",
+               url:"http://60.204.203.164:7700/u/login",
+               dataType:"json",
+               data:{
+                   email:email,
+                   password:password,
+               },
+               headers: {
+                   "Content-Type": "application/json",
+               },
+               success:function(result){
+                   const res = JSON.parse(result);
+                   if(res.success){
+                       alert("登录成功！");
+                   }
+                   else{
+                       if(res.error.includes('email')) emailError1();
+                       if(res.error.includes('password')) passwordError();
+                   }
+               },
+               error:function(msg){
+                   console.log(msg);
+               }
+           })
+        /*$.post("http://60.204.203.164:7700/u/login", JSON.stringify({
             email: email,
             password: password,
-          }), function (res) {
+        }), function (res) {
             if (res.success) {
-              alert("登录成功！");
+                alert("登录成功！");
             } else {
-              if (res.error.includes("email")) emailError1();
-              if (res.error.includes("password")) passwordError();
+                if (res.error.includes("email")) emailError1();
+                if (res.error.includes("password")) passwordError();
             }
-          }, "json");
+        }, "json");*/
     }
 })
 
@@ -158,38 +158,38 @@ function testEmail() {
         emailInput.parentNode.insertBefore(errorMessage2, emailInput.nextSibling);
     }
     else {
-     /*   $.ajax({
-            method : "POST",
-            url : "8.140.204.13:7700/u/send_code",
-            dataType : "json",
-            data : {
-                email:email,
+        $.ajax({
+            method: "POST",
+            url: "http://60.204.203.164:7700/u/send_code",
+            dataType: "json",
+            data: {
+                email: email,
             },
             headers: {
                 "Content-Type": "application/json",
             },
-            success : function(result){
+            success: function (result) {
                 const res = JSON.parse(result);
-                if(res.success){
+                if (res.success) {
                     alert(res.data);
                 }
-                else{
+                else {
                     console.log(res.error);
                 }
             },
-            error : function(msg){
+            error: function (msg) {
                 console.log(msg);
             }
-        });*/
-        $.post("60.204.203.164:7700/u/send_code", JSON.stringify({
+        });
+        /*$.post("http://60.204.203.164:7700/u/send_code", JSON.stringify({
             email: email,
-          }), function (res) {
+        }), function (res) {
             if (res.success) {
-              alert(res.data);
+                alert(res.data);
             } else {
-              console.log(res.error);
+                console.log(res.error);
             }
-          }, "json");
+        }, "json");*/
         if (countdown === 60) {
             setTimeout(() => {
                 getVerifyCode.classList.add('countdown');
@@ -209,7 +209,7 @@ function testEmail() {
     }
 }
 
-function testEmail1(){
+function testEmail1() {
     const email = emailInput.value.trim();
     emailInput.classList.remove("error");
     const errorMessage1 = emailInput.parentNode.querySelector(".error-message1");
@@ -237,7 +237,7 @@ function testEmail1(){
     else return 1;
 }
 
-function emailError(){
+function emailError() {
     emailInput.classList.remove("error");
     const error13 = emailInput.parentNode.querySelector(".error-message13");
     if (error13) {
@@ -250,14 +250,14 @@ function emailError(){
     emailInput.parentNode.insertBefore(errorMessage13, emailInput.nextSibling);
 }
 
-function testVerifyCode(){
+function testVerifyCode() {
     const verifyCode = verifyCodeInput.value.trim();
     verifyCodeInput.classList.remove("error");
     const errorMessage3 = verifyCodeInput.parentNode.parentNode.querySelector(".error-message3");
-    if(errorMessage3){
+    if (errorMessage3) {
         verifyCodeInput.parentNode.parentNode.removeChild(errorMessage3);
     }
-    if(verifyCode === ''){
+    if (verifyCode === '') {
         verifyCodeInput.classList.add('error');
         const errorMessage3 = document.createElement("p");
         errorMessage3.classList.add('error-message3');
@@ -267,10 +267,10 @@ function testVerifyCode(){
     else return 1;
 }
 
-function verifyCodeError(){
+function verifyCodeError() {
     verifyCodeInput.classList.remove("error");
     const error14 = verifyCodeInput.parentNode.parentNode.querySelector(".error-message14");
-    if(errorMessage14){
+    if (errorMessage14) {
         verifyCodeInput.parentNode.parentNode.removeChild(errorMessage14);
     }
     verifyCodeInput.classList.add('error');
@@ -280,15 +280,15 @@ function verifyCodeError(){
     emailInput.parentNode.insertBefore(errorMessage14, verifyCodeInput1.nextSibling);
 }
 
-function testUsername(){
+function testUsername() {
     const username = usernameInput.value.trim();
     usernameInput.classList.remove('error');
     const errorMessage4 = usernameInput.parentNode.querySelector(".error-message4");
-    if(errorMessage4){
+    if (errorMessage4) {
         usernameInput.parentNode.removeChild(errorMessage4);
     }
-    
-    if(username === ''){
+
+    if (username === '') {
         usernameInput.classList.add('error');
         const errorMessage4 = document.createElement('p');
         errorMessage4.classList.add('error-message4');
@@ -298,10 +298,10 @@ function testUsername(){
     else return 1;
 }
 
-function usernameError(){
+function usernameError() {
     usernameInput.classList.remove('error');
     const error5 = usernameInput.parentNode.querySelector(".error-message5");
-    if(error5){
+    if (error5) {
         usernameInput.parentNode.removeChild(error5);
     }
     usernameInput.classList.add('error');
@@ -311,25 +311,25 @@ function usernameError(){
     usernameInput.parentNode.insertBefore(errorMessage5, usernameInput.nextSibling);
 }
 
-function testPassword(){
+function testPassword() {
     const password = passwordInput.value.trim();
     passwordInput.classList.remove('error');
     const errorMessage6 = passwordInput.parentNode.querySelector(".error-message6");
-    if(errorMessage6){
+    if (errorMessage6) {
         passwordInput.parentNode.removeChild(errorMessage6);
     }
     const errorMessage7 = passwordInput.parentNode.querySelector(".error-message7");
-    if(errorMessage7){
+    if (errorMessage7) {
         passwordInput.parentNode.removeChild(errorMessage7);
     }
-    if(password === ''){
+    if (password === '') {
         passwordInput.classList.add('error');
         const errorMessage6 = document.createElement('p');
         errorMessage6.classList.add('error-message6');
         errorMessage6.innerText = "请输入密码";
         passwordInput.parentNode.insertBefore(errorMessage6, passwordInput.nextSibling);
     }
-    else if(!passwordReg.test(password)){
+    else if (!passwordReg.test(password)) {
         passwordInput.classList.add('error');
         const errorMessage7 = document.createElement('p');
         errorMessage7.classList.add('error-message7');
@@ -339,15 +339,15 @@ function testPassword(){
     else return 1;
 }
 
-function testPasswordAgain(){
+function testPasswordAgain() {
     const passwordAgain = passwordAgainInput.value.trim();
     const password = passwordInput.value.trim();
     passwordAgainInput.classList.remove('error');
     const errorMessage8 = passwordAgainInput.parentNode.querySelector(".error-message8");
-    if(errorMessage8){
+    if (errorMessage8) {
         passwordAgainInput.parentNode.removeChild(errorMessage8);
     }
-    if(password !== passwordAgain){
+    if (password !== passwordAgain) {
         passwordAgainInput.classList.add('error');
         const errorMessage8 = document.createElement('p');
         errorMessage8.classList.add('error-message8');
@@ -357,7 +357,7 @@ function testPasswordAgain(){
     else return 1;
 }
 
-function testEmail2(){
+function testEmail2() {
     const email = emailInput1.value.trim();
     emailInput1.classList.remove("error");
     const errorMessage9 = emailInput1.parentNode.querySelector(".error-message9");
@@ -378,7 +378,7 @@ function testEmail2(){
     else return 1;
 }
 
-function emailError1(){
+function emailError1() {
     emailInput1.classList.remove("error");
     const error10 = emailInput1.parentNode.querySelector(".error-message10");
     if (error10) {
@@ -391,18 +391,18 @@ function emailError1(){
     emailInput1.parentNode.insertBefore(errorMessage10, emailInput1.nextSibling);
 }
 
-function testPassword1(){
+function testPassword1() {
     const password = passwordInput1.value.trim();
     passwordInput1.classList.remove('error');
     const errorMessage11 = passwordInput1.parentNode.querySelector(".error-message11");
-    if(errorMessage11){
+    if (errorMessage11) {
         passwordInput1.parentNode.removeChild(errorMessage11);
     }
     const errorMessage12 = passwordInput1.parentNode.querySelector(".error-message12");
-    if(errorMessage12){
+    if (errorMessage12) {
         passwordInput1.parentNode.removeChild(errorMessage12);
     }
-    if(password === ''){
+    if (password === '') {
         passwordInput1.classList.add('error');
         const errorMessage11 = document.createElement('p');
         errorMessage11.classList.add('error-message11');
@@ -412,10 +412,10 @@ function testPassword1(){
     else return 1;
 }
 
-function passwordError(){
+function passwordError() {
     passwordInput1.classList.remove('error');
     const error12 = passwordInput1.parentNode.querySelector(".error-message12");
-    if(error12){
+    if (error12) {
         passwordInput1.parentNode.removeChild(error12);
     }
     passwordInput1.classList.add('error');
