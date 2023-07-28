@@ -1,0 +1,414 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.dot {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-image: url(../images/star.png);
+    background-size: contain;
+    animation: flash 2s infinite, moveStar 25s linear infinite;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes moveStar {
+    from {
+        transform: rotate(0deg) translateX(150px) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+}
+
+body::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+}
+
+body.show::before {
+    display: block;
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 250px;
+    height: 150px;
+    background-color: transparent;
+    background-image: url(../images/logo-removebg-preview.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.settings {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+
+.settings ul li {
+    cursor: pointer;
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    margin-left: 25px;
+}
+
+.settings ul li .app-des {
+    width: 120px;
+    height: 180px;
+    border-radius: 10px;
+    background-color: rgb(52, 52, 52);
+    transform: translate(-70px, 50px);
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.settings ul li .app-des.show {
+    display: flex;
+}
+
+.settings ul li li {
+    cursor: pointer;
+    border-radius: 0;
+    border: 0;
+    background: transparent;
+    width: 120px;
+    margin: 0;
+    font-size: 13px;
+    margin-top: 5px;
+    padding-top: 5px;
+    text-align: center;
+    color: #fff;
+    padding: 5px;
+}
+
+.edit-model {
+    visibility: hidden;
+    position: fixed;
+    top: 120px;
+    left: 460px;
+    background-color: rgb(52, 52, 52);
+    width: 640px;
+    height: 450px;
+    border-radius: 10px;
+    z-index: 12;
+    animation-fill-mode: both;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+}
+
+.edit-model.show {
+    visibility: visible;
+    animation-name: turnup;
+}
+
+.edit-model.hidden {
+    visibility: hidden;
+    animation-name: disappear;
+}
+
+@keyframes turnup {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+@keyframes disappear {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
+.edit-model .up {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    top: 0;
+    width: 100%;
+    height: 15%;
+    border-bottom: 1px gray solid;
+}
+
+.edit-model .up p {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 270px;
+    margin-right: 250px;
+}
+
+.edit-model .up .close {
+    cursor: pointer;
+    color: #fff;
+}
+
+.edit-model .main {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    height: 70%;
+    /* background-color: antiquewhite; */
+}
+
+.edit-model .main .input {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-model .input textarea {
+    position: absolute;
+    z-index: 1;
+    resize: none;
+    background-color: transparent;
+    line-height: 30px;
+    width: 90%;
+    height: 50%;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-top: -5px;
+    border-radius: 5px;
+    border: 1px gray solid;
+    overflow: hidden;
+}
+
+.edit-model textarea:focus {
+    outline: 0;
+}
+
+.edit-model .lines {
+    position: absolute;
+    z-index: 0;
+    width: 85%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-model .lines span {
+    display: block;
+    height: 30px;
+    border-bottom: 1px solid #e8e6e6;
+}
+
+.edit-model .count{
+    position: absolute;
+    font-size: 12px;
+    color: gray;
+    top: 145px;
+    right:60px;
+}
+.edit-model .tags{
+    width: 100%;
+    height: 40%;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.edit-model .tags p{
+    color: #fff;
+}
+
+.edit-model .tags .tag-container{
+    width: 90%;
+    height: 30%;
+    background-color: #000;
+    margin-top: 15px;
+    border: 1px gray solid;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.edit-model .tag-container .tag1{
+    float: left;
+    margin-left: 10px;
+    width: 50px;
+    height: 25px;
+    background-color: gray;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    padding-left: 10px;
+    /* text-align: center; */
+    line-height: 25px;
+}
+
+.edit-model .tag-container .tag1 .close{
+    visibility: hidden;
+    display: inline-block;
+    font-size: 8px;
+    color: #fff;
+    transform: translateX(8px);    
+}
+
+.edit-model .tag1:hover .close{
+    visibility: visible;
+    cursor: pointer;
+}
+.edit-model .tag-to-choose{
+    margin-top: 5px;
+    width: 90%;
+    height: 30px;
+}
+
+.edit-model .tag-to-choose .tag{
+    float: left;
+    width: 50px;
+    height: 30px;
+    background-color: gray;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+}
+
+.edit-model .tag-to-choose li:hover{
+    cursor: pointer;
+    background-color: rgb(193, 193, 193);
+}
+
+.edit-model .bottom {
+    position: absolute;
+    border-top: 1px solid gray;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    /* background-color: aquamarine; */
+}
+
+.edit-model .bottom button{
+    position: absolute;
+    cursor: pointer;
+    width: 70px;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.edit-model .bottom button:active{
+    outline: 0;
+}
+
+.edit-model .bottom .cancel{
+    background-color: rgb(33, 33, 33);
+    top: 15px;
+    right: 20px;
+}
+
+.edit-model .bottom .send{
+    background-color: rgb(72, 0, 255);
+    top: 15px;
+    right: 100px;
+}
+.star {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    width: 1px;
+    height: 0;
+    background: #f3ffce;
+    border-radius: 50%;
+    animation: glowing 2s infinite;
+    transition: background-color 0.3s ease-in;
+}
+
+.star::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    transform: translate(-48px, -45px);
+    /* background-image: url(../images/Component\ 39.svg); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #fff9ce;
+}
+
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 15px 5px #f3ffce;
+    }
+
+    50% {
+        box-shadow: 0 0 20px 10px #f3ffce;
+    }
+
+    100% {
+        box-shadow: 0 0 15px 5px #f3ffce;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) translateX(5px) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(5px) rotate(-360deg);
+    }
+}
