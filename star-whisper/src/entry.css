@@ -217,3 +217,95 @@ p[class^="error-message"]{
     font-size: 12px;
     color: red;
 }
+
+.tags{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    flex-direction: column;
+    top: 15%;
+    right: 10%;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.tags.hidden{
+    display: none;
+}
+.tags h1{
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 80px;
+    color: var(--blue1);
+}
+
+.tags .title{
+    font-size: 15px;
+    color: #fff;
+    bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.tags .tag-container{
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.tags .tag-container li{
+    float: left;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--blue1);
+    border-radius: 10px;
+    border: 1px #fff solid;
+    line-height: 40px;
+    margin-left: 15px;
+    transition: all 0.3s ease-in;
+}
+
+.tags button{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 300px;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--blue2);
+    color: #fff;
+    font-size: 13px;
+    border-radius: 10px;
+    border: 0;
+}
+
+.tags button.close{
+    cursor: default;
+    color: rgba(255, 255,255,0.5);
+}
+
+.tags .tag-container li:hover,.tags li.seleted{
+    background-color: #fff;
+    cursor: pointer;
+    color: var(--blue2);
+}
+
+.tags button:active{
+    outline: 0;
+}
+
+.tags .not{
+    color: var(--blue2);
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 12px;
+    width: 50px;
+}
+
+.not.hidden{
+    color: var(--blue2);
+    cursor: default;
+    opacity: 0.5;
+}
+

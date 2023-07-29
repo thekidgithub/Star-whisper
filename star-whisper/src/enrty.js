@@ -1,5 +1,6 @@
 const gotoLogin = document.querySelector('.signin .gotologin a');
 const gotoSignin = document.querySelector('.login .gotosignin a');
+const tags = document.querySelector('.tags');
 const signin = document.querySelector('.signin');
 const login = document.querySelector('.login');
 const getVerifyCode = document.querySelector('#get-verifycode');
@@ -58,7 +59,12 @@ signinSubmit.addEventListener('click', (e) => {
                },
                success:function(result){
                    if(result.success){
-                    window.location.replace('main.html');
+                    if(result.success){
+                        if(!localStorage.getItem('author')){
+                            localStorage.setItem('author',result.token);
+                        }
+                        window.location.replace('main.html');
+                    }
                    }
                    else{
                        if(result.error.includes('verifycode')) verifyCodeError();
@@ -94,8 +100,13 @@ loginSubmit.addEventListener('click', (e) => {
                },
                success:function(result){
                    if(result.success){
+                    console.log(result);
+                    console.log(result.data.token);
                        if(!localStorage.getItem('author')){
-                        localStorage.setItem('author',result.data);
+                        localStorage.setItem('author',result.data.token);
+                       }
+                       if(!localStorage.getItem('id')){
+                        localStorage.setItem('id',result.data.id);
                        }
                        window.location.replace('main.html');
                    }
@@ -394,3 +405,61 @@ function passwordError() {
     errorMessage12.innerText = "密码错误";
     passwordInput1.parentNode.insertBefore(errorMessage12, passwordInput1.nextSibling);
 }
+const myTags = [];
+const tagsUl = document.querySelector('.tag-container');
+const sendTag = document.querySelector('.tags button');
+const not = document.querySelector('.tags .not')
+tagsUl.addEventListener('click',(e)=>{
+    if(e.target.classList.contains('tag')){
+        const tag = e.target;
+        if(!tag.classList.contains('seleted')){
+            tag.classList.add('seleted');
+            myTags.push(tag.innerHTML);
+        }
+        else{
+            tag.classList.remove('seleted');
+            for(let i = 0 ;i < myTags.length;i++){
+                if(myTags[i]===tag.innerHTML){
+                    myTags.splice(i,1);
+                    break;
+                }
+            }
+        }
+        if(myTags.length>0){
+            sendTag.classList.remove('close');
+            not.classList.add('hidden');
+        }
+        else{
+            sendTag.classList.add('close');
+            not.classList.remove('hidden');
+        }
+    }
+})
+
+sendTag.addEventListener('click',()=>{
+    if(myTags.length>0){
+        $.ajax({
+            method:"POST",
+            url:"http://60.204.203.164:7700",
+            dataType:"json",
+            data:JSON.stringify({
+                tags:myTags,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('author'),
+            },
+            success:function(result){
+                if(result.success){
+                    if(!localStorage.getItem('author')){
+                        localStorage.setItem('author',result.token);
+                    }
+                    window.location.replace('main.html');
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        })
+    }
+})

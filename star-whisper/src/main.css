@@ -8,6 +8,9 @@
 body {
     position: relative;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #000;
     overflow: hidden;
 }
@@ -124,6 +127,14 @@ body.show::before {
     padding: 5px;
 }
 
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 .edit-model {
     visibility: hidden;
     position: fixed;
@@ -217,12 +228,10 @@ body.show::before {
 
 .edit-model .input textarea {
     position: absolute;
-    z-index: 1;
     resize: none;
     background-color: transparent;
     line-height: 30px;
     width: 90%;
-    height: 50%;
     color: #fff;
     font-size: 15px;
     padding: 5px;
@@ -270,42 +279,6 @@ body.show::before {
     color: #fff;
 }
 
-.edit-model .tags .tag-container{
-    width: 90%;
-    height: 30%;
-    background-color: #000;
-    margin-top: 15px;
-    border: 1px gray solid;
-    border-radius: 5px;
-    padding: 3px;
-}
-
-.edit-model .tag-container .tag1{
-    float: left;
-    margin-left: 10px;
-    width: 50px;
-    height: 25px;
-    background-color: gray;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 12px;
-    padding-left: 10px;
-    /* text-align: center; */
-    line-height: 25px;
-}
-
-.edit-model .tag-container .tag1 .close{
-    visibility: hidden;
-    display: inline-block;
-    font-size: 8px;
-    color: #fff;
-    transform: translateX(8px);    
-}
-
-.edit-model .tag1:hover .close{
-    visibility: visible;
-    cursor: pointer;
-}
 .edit-model .tag-to-choose{
     margin-top: 5px;
     width: 90%;
@@ -314,15 +287,21 @@ body.show::before {
 
 .edit-model .tag-to-choose .tag{
     float: left;
-    width: 50px;
+    /* width: 50px; */
+    padding: 7px;
     height: 30px;
     background-color: gray;
+    margin-top: 20px;
     margin-left: 5px;
     border-radius: 5px;
     color: #fff;
     text-align: center;
-    line-height: 30px;
+    line-height: 15px;
     font-size: 12px;
+}
+
+.edit-model .tag-to-choose .tag.seleted{
+    background-color: rgb(193, 193, 193);
 }
 
 .edit-model .tag-to-choose li:hover{
@@ -365,6 +344,7 @@ body.show::before {
     top: 15px;
     right: 100px;
 }
+
 .star {
     cursor: pointer;
     position: absolute;
@@ -383,7 +363,7 @@ body.show::before {
     width: 100px;
     height: 100px;
     transform: translate(-48px, -45px);
-    /* background-image: url(../images/Component\ 39.svg); */
+    background-image: url(../images/star1.svg);
     background-size: contain;
     background-repeat: no-repeat;
     color: #fff9ce;
@@ -410,5 +390,325 @@ body.show::before {
 
     to {
         transform: rotate(360deg) translateX(5px) rotate(-360deg);
+    }
+}
+
+.get-model {
+    visibility: hidden;
+    position: fixed;
+    top: 30px;
+    left: 460px;
+    background-color: rgb(52, 52, 52);
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    /* height: 450px; */
+    border-radius: 10px;
+    z-index: 12;
+    animation-fill-mode: both;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+}
+
+.get-model.show {
+    visibility: visible;
+    animation-name: turnup;
+}
+
+.get-model.hidden {
+    visibility: hidden;
+    animation-name: disappear;
+}
+
+.get-model .up {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 112px;
+    border-bottom: 1px gray solid;
+    background-color: rgb(52, 52, 52);
+}
+
+.get-model .info{
+    width: 30%;
+    height: 80%;
+    float: left;
+    /* background-color: green; */
+    margin-left: 30px;
+}
+
+.get-model .up .close {
+    cursor: pointer;
+    color: #fff;
+    transform: translate(380px,-40px);
+}
+
+.get-model .profile{
+    background-color: gray;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-top: 20px;
+    float: left;
+}
+
+.get-model .username{
+    color: #fff;
+    font-size: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.get-model .main {
+    width: 100%;
+    height: 315px;
+    background-color: rgb(52, 52, 52);
+}
+
+.get-model  .input {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.get-model .input textarea {
+    position: relative;
+    resize: none;
+    background-color: transparent;
+    line-height: 30px;
+    width: 90%;
+    /* height: 20%; */
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-top: -5px;
+    border-radius: 5px;
+    border: 1px gray solid;
+    overflow: hidden;
+}
+
+.get-model textarea:focus {
+    outline: 0;
+}
+
+.get-model .lines {
+    position: absolute;
+    z-index: 0;
+    width: 85%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.get-model .main .lines{
+    top: 150px;
+}
+.get-model .lines span {
+    display: block;
+    height: 30px;
+    border-bottom: 1px solid #e8e6e6;
+}
+
+.get-model .count{
+    position: absolute;
+    font-size: 12px;
+    color: gray;
+    bottom: 30px;
+    right: 40px;
+}
+
+.get-model .tags{
+    width: 100%;
+    height: 40%;
+    padding-left: 30px;
+    padding-top: 10px;
+    /* background-color: green; */
+}
+
+.get-model .tags p{
+    color: #fff;
+}
+
+.get-model .tags .tag-container{
+    width: 90%;
+    height: 30%;
+    margin-top: 15px;
+    padding: 3px;
+}
+
+.get-model .tag-container .tag1{
+    float: left;
+    margin-left: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    background-color: black;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    transform: translateY(-10px);
+}
+
+.get-model .total-comments{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(52, 52, 52);
+    /* background-color: red; */
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 50px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+    /* border-bottom: 1px solid gray; */
+}
+
+.get-model .comments{
+    height: 300px;
+    overflow: auto;
+}
+
+.get-model .comments .comment{
+    width: 100%;
+    height: 189px;
+    position: relative;
+    background-color: rgb(52, 52, 52);
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.get-model .comments .comment textarea{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    resize: none;
+    background-color: transparent;
+    line-height: 30px;
+    width: 90%;
+    height: 80%;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-top: -5px;
+    border-radius: 5px;
+    border: 1px gray solid;
+    overflow: hidden;
+}
+
+.get-model .comments .comment .info{
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    height: 20px;
+    padding-left: 40px;
+    padding-top: -10px;
+    /* background-color: green; */
+}
+
+.get-model .comments .info .profile{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.get-model .comments .info .username{
+    color: #fff;
+    font-size: 14px;
+}
+
+.get-model .send-comment{
+    width: 100%;
+    height: 189px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    /* background-color: aqua; */
+}
+
+.get-model .send-comment .lines{
+    bottom: -75px;
+}
+
+.get-model .bottom {
+    position: relative;
+    border-top: 1px solid gray;
+    bottom: 0;
+    width: 100%;
+    height: 67px;
+}
+
+.get-model .bottom button{
+    position: absolute;
+    cursor: pointer;
+    width: 70px;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.get-model .bottom button:active{
+    outline: 0;
+}
+
+.get-model .bottom .cancel{
+    background-color: rgb(33, 33, 33);
+    top: 15px;
+    right: 20px;
+}
+
+.get-model .bottom .send{
+    background-color: rgb(72, 0, 255);
+    top: 15px;
+    right: 100px;
+}
+
+.email-box {
+    z-index: 1;
+    cursor: pointer;
+    position: fixed;
+    right: 50px;
+    top: 400px;
+    display: block;
+    width: 1px;
+    height: 0;
+    background: #f3ffce;
+    border-radius: 50%;
+    animation: glowing1 2s infinite;
+    transition: background-color 0.3s ease-in;
+}
+
+.email-box::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    transform: translate(-48px, -45px);
+    background-image: url(../images/star4.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #fff9ce;
+}
+
+@keyframes glowing1 {
+    0% {
+        box-shadow: 0 0 15px 5px #fff047;
+    }
+
+    50% {
+        box-shadow: 0 0 20px 10px #fff047;
+    }
+
+    100% {
+        box-shadow: 0 0 15px 5px #fff047;
     }
 }
