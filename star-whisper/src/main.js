@@ -405,3 +405,11 @@ email.addEventListener('click', () => {
         },
     })
 })
+
+const exit = document.querySelector('.exit');
+if(!localStorage.getItem('author')) exit.innerHTML = '注册/登录';
+else exit.innerHTML = '退出登录';
+exit.addEventListener('click',()=>{
+    localStorage.clear();
+    window.location.href = '/entry';
+})
