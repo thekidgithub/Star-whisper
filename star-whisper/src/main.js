@@ -3,6 +3,7 @@ let screenH = document.documentElement.clientHeight * 0.8;
 let screenW1 = document.documentElement.clientWidth * 0.1;
 let screenH1 = document.documentElement.clientHeight * 0.1;
 let myTags = [];
+let flag = 1;
 /*const starContainer = document.querySelector('.star-container');
 let containerStyle = window.getComputedStyle(starContainer);*/
 const myProfile = document.querySelector('.settings .profile');
@@ -131,6 +132,7 @@ const commNums = document.querySelector('.get-model .total-comments');
 let starId, user1Id, user2Id;
 document.body.addEventListener('click', (e) => {
     if (e.target.classList.contains('star1') || e.target.classList.contains('star2') || e.target.classList.contains('star3')) {
+        flag = 1;
         $.ajax({
             method: 'POST',
             url: 'http://60.204.203.164:7700/randp',
@@ -243,7 +245,7 @@ commentTextarea.addEventListener('keyup', (e) => {
 })
 
 sendGetModel.addEventListener('click', () => {
-    if (commentTextarea.value.length > 0) {
+    if (commentTextarea.value.length > 0 && flag) {
         const comment = commentTextarea.value;
         // console.log(starId,user1Id,localStorage.getItem('id'));
         $.ajax({
@@ -307,7 +309,7 @@ sendGetModel.addEventListener('click', () => {
 
 const email = document.querySelector('.email-box');
 email.addEventListener('click', () => {
-
+    flag = 0;
     $.ajax({
         method: "GET",
         url: `http://60.204.203.164:7700/unseen`,
@@ -321,6 +323,68 @@ email.addEventListener('click', () => {
             getModel.classList.remove('hidden');
             getModel.classList.add('show');
             document.body.classList.add('show');
+            sendGetModel.addEventListener('click', () => {
+                if (commentTextarea.value.length > 0 && !flag) {
+                    const comment = commentTextarea.value;
+                    // console.log(starId,user1Id,localStorage.getItem('id'));
+                    $.ajax({
+                        method: 'POST',
+                        url: `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${user1Id ^ result.data.user_id ^ result.data.send_id}`,
+                        dataType: 'json',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": localStorage.getItem('author'),
+                        },
+                        data: JSON.stringify({
+                            content: comment,
+                        }),
+                        success: function (result) {
+                            if (result.success) {
+                                const comment = document.createElement('li');
+                                comment.classList.add('comment');
+                                const info = document.createElement('div');
+                                const profile = document.createElement('div');
+                                const username = document.createElement('div');
+                                info.classList.add('info');
+                                profile.classList.add('profile');
+                                username.classList.add('username');
+                                const textarea = document.createElement('textarea');
+                                textarea.readOnly = true;
+                                textarea.innerHTML = result.data.content;
+                                username.innerHTML = result.data.send_name;
+                                comment.appendChild(textarea);
+                                info.appendChild(profile);
+                                info.appendChild(username);
+                                comment.appendChild(info);
+                                UlGetModel.insertBefore(comment, UlGetModel.firstChild);
+                                $.ajax({
+                                    method: "GET",
+                                    url: `http://60.204.203.164:7700/chatnum?post=${starId}&user1=${user1Id}&user2=${user1Id ^ result.data.user_id ^ result.data.send_id}`,
+                                    dataType: "json",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Authorization": localStorage.getItem('author'),
+                                    },
+                                    success: function (result) {
+                                        commNums.innerHTML = `回复(${result.data})`;
+                                    },
+                                    error: function (msg) {
+                                        console.log(msg);
+                                    },
+                                });
+                            }
+                            else alert("请先登录!");
+                        },
+                     
+                        error: function (msg) {
+                            console.log(msg);
+                        },
+                    })
+                }
+                commentTextarea.value = '';
+                const len = commentTextarea.value.length;
+                lenComment.innerHTML = `${len}/150`;
+            })
             $.ajax({
                 method: 'GET',
                 url: `http://60.204.203.164:7700/p/${result.data.post_id}`,
