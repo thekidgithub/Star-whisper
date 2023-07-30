@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4936650",
+      "name": "bell-fill",
+      "font_class": "bell-fill",
+      "unicode": "e866",
+      "unicode_decimal": 59494
+    },
+    {
+      "icon_id": "11399167",
+      "name": "pen",
+      "font_class": "pen",
+      "unicode": "e5aa",
+      "unicode_decimal": 58794
+    }
+  ]
+}
