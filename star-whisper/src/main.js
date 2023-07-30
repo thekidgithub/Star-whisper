@@ -109,7 +109,7 @@ sendEditModel.addEventListener('click', () => {
                     console.log(result);
                 }
                 else {
-                    alert("请先登录！")
+                    alert(result.error);
                 }
             },
             error: function (msg) {
@@ -329,7 +329,7 @@ sendGetModel.addEventListener('click', () => {
                         }
                     });
                 }
-                else alert("请先登录！");
+                else alert(result.error);
             },
 
             error: function (msg) {
@@ -447,10 +447,7 @@ email.addEventListener('click', () => {
                     },
                 })
             }
-            else {
-                if (!result.error.includes('login')) alert("没有消息");
-                else alert("请先登录");
-            }
+            else alert(result.error);
         },
         error: function (msg) {
             console.log(msg);
