@@ -363,15 +363,19 @@ body.show::before {
 }
 
 .star1{
-    animation: glowing 2s infinite,rotate1 15s linear infinite;
+    animation: glowing 2s infinite,rotate1 25s linear infinite;
 }
 
 .star2{
-    animation: glowing 2s infinite,rotate2 15s linear infinite;
+    animation: glowing 2s infinite,rotate2 25s linear infinite;
 }
 
 .star3{
-    animation: glowing 2s infinite,rotate3 15s linear infinite;
+    animation: glowing 2s infinite,rotate3 25s linear infinite;
+}
+
+.star1:hover,.star2:hover,.star3:hover{
+    animation-play-state: paused;
 }
 
 .star1::after {
@@ -403,7 +407,7 @@ body.show::before {
     display: block;
     width: 100px;
     height: 100px;
-    transform: translate(-48px, -45px);
+    transform: translate(-48px, -48px);
     background-image: url(../images/star3.svg);
     background-size: contain;
     background-repeat: no-repeat;
