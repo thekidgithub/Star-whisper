@@ -57,7 +57,7 @@ cancelEditModel.addEventListener('click', () => {
     document.body.classList.remove('show');
 })
 
-sendTextarea.addEventListener('change', (e) => {
+sendTextarea.addEventListener('keyup', (e) => {
     const len = sendTextarea.value.length;
     lengthEditModel.innerHTML = `${len}/150`;
 })

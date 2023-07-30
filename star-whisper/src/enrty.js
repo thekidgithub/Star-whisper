@@ -61,8 +61,11 @@ signinSubmit.addEventListener('click', (e) => {
                    if(result.success){
                     if(result.success){
                         if(!localStorage.getItem('author')){
-                            localStorage.setItem('author',result.token);
-                        }
+                            localStorage.setItem('author',result.data.token);
+                           }
+                           if(!localStorage.getItem('id')){
+                            localStorage.setItem('id',result.data.id);
+                           }
                         window.location.href = '../';
                     }
                    }
