@@ -252,7 +252,7 @@ sendGetModel.addEventListener('click', () => {
         // console.log(starId,user1Id,localStorage.getItem('id'));
         $.ajax({
             method: 'POST',
-            url: mode === 1 ? `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}` : `http://60.204.203.164:7700/chatnum?post=${starId}&user1=${user1Id}&user2=${user1Id ^ user_id ^ send_id}`,
+            url: mode === 1 ? `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}` : `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${user1Id ^ user_id ^ send_id}`,
             dataType: 'json',
             headers: {
                 "Content-Type": "application/json",
@@ -456,7 +456,8 @@ if (!localStorage.getItem('author')) exit.innerHTML = '注册/登录';
 else exit.innerHTML = '退出登录';
 exit.addEventListener('click', () => {
     localStorage.clear();
-    window.location.href = '/entry';
+    // window.location.href = '/entry';
+    window.location.href = '../entry/entry.html'
 })
 
 const notice = document.querySelector('.notice');

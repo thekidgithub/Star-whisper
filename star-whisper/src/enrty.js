@@ -67,6 +67,7 @@ signinSubmit.addEventListener('click', (e) => {
                             localStorage.setItem('id',result.data.id);
                            }
                         window.location.href = '../main/main.html';
+                        // window.location.href = '../';
                     }
                    }
                    else{
@@ -112,6 +113,7 @@ loginSubmit.addEventListener('click', (e) => {
                         localStorage.setItem('id',result.data.id);
                        }
                        window.location.href = '../main/main.html';
+                    //    window.location.href = '../';
                    }
                    else{
                        if(result.error.includes('email')) emailError1();
