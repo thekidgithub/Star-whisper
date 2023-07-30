@@ -1,7 +1,7 @@
-let screenW = document.documentElement.clientWidth*0.8;
-let screenH = document.documentElement.clientHeight*0.8;
-let screenW1 = document.documentElement.clientWidth*0.1;
-let screenH1 = document.documentElement.clientHeight*0.1;
+let screenW = document.documentElement.clientWidth * 0.8;
+let screenH = document.documentElement.clientHeight * 0.8;
+let screenW1 = document.documentElement.clientWidth * 0.1;
+let screenH1 = document.documentElement.clientHeight * 0.1;
 const myTags = [];
 /*const starContainer = document.querySelector('.star-container');
 let containerStyle = window.getComputedStyle(starContainer);*/
@@ -12,13 +12,13 @@ for (let i = 0; i < 10; i++) {
     let star = document.createElement('span');
     let x = parseInt(Math.random() * parseInt(screenW));
     let y = parseInt(Math.random() * parseInt(screenH));
-    star.style.left = (x+screenW1) + 'px';
-    star.style.top = (y+screenH1) + 'px';
+    star.style.left = (x + screenW1) + 'px';
+    star.style.top = (y + screenH1) + 'px';
     star.style.zIndex = '1';
     // star.style.animationDelay = `${Math.random()*5}s`;
     star.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() + 0.5})`;
-    if(i<3) star.classList.add('star1');
-    else if(i<6) star.classList.add('star2');
+    if (i < 3) star.classList.add('star1');
+    else if (i < 6) star.classList.add('star2');
     else star.classList.add('star3');
     document.body.appendChild(star);
 }
@@ -98,6 +98,9 @@ sendEditModel.addEventListener('click', () => {
                     alert("发布成功");
                     console.log(result);
                 }
+                else {
+                    alert("请先登录！")
+                }
             },
             error: function (msg) {
                 console.log(msg);
@@ -127,14 +130,14 @@ const UlGetModel = document.querySelector('.get-model .comments');
 const commNums = document.querySelector('.get-model .total-comments');
 let starId, user1Id, user2Id;
 document.body.addEventListener('click', (e) => {
-    if (e.target.classList.contains('star1')||e.target.classList.contains('star2')||e.target.classList.contains('star3')) {
+    if (e.target.classList.contains('star1') || e.target.classList.contains('star2') || e.target.classList.contains('star3')) {
         $.ajax({
             method: 'POST',
             url: 'http://60.204.203.164:7700/randp',
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify({
-                tags: [],
+                tags: myTags,
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -240,58 +243,62 @@ commentTextarea.addEventListener('keyup', (e) => {
 })
 
 sendGetModel.addEventListener('click', () => {
-    if(commentTextarea.value.length>0){
-           const comment = commentTextarea.value;
-    // console.log(starId,user1Id,localStorage.getItem('id'));
-    $.ajax({
-        method: 'POST',
-        url: `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}`,
-        dataType: 'json',
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('author'),
-        },
-        data: JSON.stringify({
-            content: comment,
-        }),
-        success: function (result) {
-            const comment = document.createElement('li');
-            comment.classList.add('comment');
-            const info = document.createElement('div');
-            const profile = document.createElement('div');
-            const username = document.createElement('div');
-            info.classList.add('info');
-            profile.classList.add('profile');
-            username.classList.add('username');
-            const textarea = document.createElement('textarea');
-            textarea.readOnly = true;
-            textarea.innerHTML = result.data.content;
-            username.innerHTML = result.data.send_name;
-            comment.appendChild(textarea);
-            info.appendChild(profile);
-            info.appendChild(username);
-            comment.appendChild(info);
-            UlGetModel.insertBefore(comment, UlGetModel.firstChild);
-            $.ajax({
-                method: "GET",
-                url: `http://60.204.203.164:7700/chatnum?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}`,
-                dataType: "json",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": localStorage.getItem('author'),
-                },
-                success: function (result) {
-                    commNums.innerHTML = `回复(${result.data})`;
-                },
-                error: function (msg) {
-                    console.log(msg);
-                },
-            });
-        },
-        error: function (msg) {
-            console.log(msg);
-        },
-    })
+    if (commentTextarea.value.length > 0) {
+        const comment = commentTextarea.value;
+        // console.log(starId,user1Id,localStorage.getItem('id'));
+        $.ajax({
+            method: 'POST',
+            url: `http://60.204.203.164:7700/chat?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}`,
+            dataType: 'json',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem('author'),
+            },
+            data: JSON.stringify({
+                content: comment,
+            }),
+            success: function (result) {
+                if (result.success) {
+                    const comment = document.createElement('li');
+                    comment.classList.add('comment');
+                    const info = document.createElement('div');
+                    const profile = document.createElement('div');
+                    const username = document.createElement('div');
+                    info.classList.add('info');
+                    profile.classList.add('profile');
+                    username.classList.add('username');
+                    const textarea = document.createElement('textarea');
+                    textarea.readOnly = true;
+                    textarea.innerHTML = result.data.content;
+                    username.innerHTML = result.data.send_name;
+                    comment.appendChild(textarea);
+                    info.appendChild(profile);
+                    info.appendChild(username);
+                    comment.appendChild(info);
+                    UlGetModel.insertBefore(comment, UlGetModel.firstChild);
+                    $.ajax({
+                        method: "GET",
+                        url: `http://60.204.203.164:7700/chatnum?post=${starId}&user1=${user1Id}&user2=${Number(localStorage.getItem('id'))}`,
+                        dataType: "json",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": localStorage.getItem('author'),
+                        },
+                        success: function (result) {
+                            commNums.innerHTML = `回复(${result.data})`;
+                        },
+                        error: function (msg) {
+                            console.log(msg);
+                        },
+                    });
+                }
+                else alert("请先登录!");
+            },
+         
+            error: function (msg) {
+                console.log(msg);
+            },
+        })
     }
     commentTextarea.value = '';
     const len = commentTextarea.value.length;
@@ -300,9 +307,7 @@ sendGetModel.addEventListener('click', () => {
 
 const email = document.querySelector('.email-box');
 email.addEventListener('click', () => {
-    getModel.classList.remove('hidden');
-    getModel.classList.add('show');
-    document.body.classList.add('show');
+
     $.ajax({
         method: "GET",
         url: `http://60.204.203.164:7700/unseen`,
@@ -312,7 +317,10 @@ email.addEventListener('click', () => {
             "Authorization": localStorage.getItem('author'),
         },
         success: function (result) {
-            // console.log(result.data.post_id);
+            if(result.success){
+            getModel.classList.remove('hidden');
+            getModel.classList.add('show');
+            document.body.classList.add('show');
             $.ajax({
                 method: 'GET',
                 url: `http://60.204.203.164:7700/p/${result.data.post_id}`,
@@ -399,6 +407,11 @@ email.addEventListener('click', () => {
                     // console.log(msg);
                 },
             })
+            }
+            else{
+                if(!result.error.includes('login')) alert("没有消息");
+                else alert("请先登录");
+            }
         },
         error: function (msg) {
             console.log(msg);
@@ -407,9 +420,55 @@ email.addEventListener('click', () => {
 })
 
 const exit = document.querySelector('.exit');
-if(!localStorage.getItem('author')) exit.innerHTML = '注册/登录';
+if (!localStorage.getItem('author')) exit.innerHTML = '注册/登录';
 else exit.innerHTML = '退出登录';
-exit.addEventListener('click',()=>{
+exit.addEventListener('click', () => {
     localStorage.clear();
-    window.location.href = '/entry';
+    window.location.href = '../entry/entry.html';
 })
+
+const notice = document.querySelector('.notice');
+const tagModel = document.querySelector('.selete-model');
+const closeTagModel = document.querySelector('.selete-model .close');
+const cancelTagModel = document.querySelector('.selete-model .cancel');
+const tagsUl1 = document.querySelector('.selete-model .tag-to-choose');
+const sendTagModel = document.querySelector('.selete-model .send');
+notice.addEventListener('click',()=>{
+    tagModel.classList.add('show');
+    tagModel.classList.remove('hidden');
+    document.body.classList.add('show');
+})
+
+closeTagModel.addEventListener('click',()=>{
+    tagModel.classList.remove('show');
+    tagModel.classList.add('hidden');
+    document.body.classList.remove('show');
+})
+
+cancelTagModel.addEventListener('click',()=>{
+    tagModel.classList.remove('show');
+    tagModel.classList.add('hidden');
+    document.body.classList.remove('show');
+})
+const tags1 = document.querySelectorAll('.selete-model li')
+tagsUl1.addEventListener('click',(event)=>{
+    if (event.target.classList.contains('tag')) {
+        tags1.forEach((e) => {
+            e.classList.remove('seleted');
+        })
+        event.target.classList.add('seleted');
+    }
+})
+
+sendTagModel.addEventListener('click',()=>{
+    myTags = [];
+    tags1.forEach((e, i) => {
+        if (e.classList.contains('seleted')) {
+            myTags.push(tagToChoose1[i]);
+        }
+    })
+    tagModel.classList.remove('show');
+    tagModel.classList.add('hidden');
+    document.body.classList.remove('show');
+})
+

@@ -772,3 +772,137 @@ body.show::before {
         box-shadow: 0 0 15px 5px #fff047;
     }
 }
+
+.selete-model {
+    visibility: hidden;
+    position: fixed;
+    top: 270px;
+    left: 460px;
+    background-color: rgb(52, 52, 52);
+    width: 640px;
+    height: 300px;
+    border-radius: 10px;
+    z-index: 12;
+    animation-fill-mode: both;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+}
+
+.selete-model.show {
+    visibility: visible;
+    animation-name: turnup;
+}
+
+.selete-model.hidden {
+    visibility: hidden;
+    animation-name: disappear;
+}
+
+.selete-model .up {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    top: 0;
+    width: 100%;
+    height: 15%;
+    border-bottom: 1px gray solid;
+}
+
+.selete-model .up p {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 270px;
+    margin-right: 230px;
+}
+
+.selete-model .up .close {
+    cursor: pointer;
+    color: #fff;
+}
+
+.selete-model .main {
+    position: absolute;
+    margin-top: 30px;
+    top: 15%;
+    width: 100%;
+    height: 70%;
+    /* background-color: antiquewhite; */
+}
+
+.selete-model .tags{
+    width: 100%;
+    height: 40%;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.selete-model .tags p{
+    color: #fff;
+}
+
+.selete-model .tag-to-choose{
+    margin-top: 5px;
+    width: 90%;
+    height: 30px;
+}
+
+.selete-model .tag-to-choose .tag{
+    float: left;
+    /* width: 50px; */
+    padding: 7px;
+    height: 30px;
+    background-color: gray;
+    margin-top: 20px;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    line-height: 15px;
+    font-size: 12px;
+}
+
+.selete-model .tag-to-choose .tag.seleted{
+    background-color: rgb(193, 193, 193);
+}
+
+.selete-model .tag-to-choose li:hover{
+    cursor: pointer;
+    background-color: rgb(193, 193, 193);
+}
+
+.selete-model .bottom {
+    position: absolute;
+    border-top: 1px solid gray;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    /* background-color: aquamarine; */
+}
+
+.selete-model .bottom button{
+    position: absolute;
+    cursor: pointer;
+    width: 70px;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.selete-model .bottom button:active{
+    outline: 0;
+}
+
+.selete-model .bottom .cancel{
+    background-color: rgb(33, 33, 33);
+    top: 15px;
+    right: 20px;
+}
+
+.selete-model .bottom .send{
+    background-color: rgb(72, 0, 255);
+    top: 15px;
+    right: 100px;
+}

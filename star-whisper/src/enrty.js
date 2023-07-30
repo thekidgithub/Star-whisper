@@ -63,7 +63,7 @@ signinSubmit.addEventListener('click', (e) => {
                         if(!localStorage.getItem('author')){
                             localStorage.setItem('author',result.token);
                         }
-                        window.location.href = '../';
+                        window.location.href = '../main/main.html';
                     }
                    }
                    else{
@@ -108,7 +108,7 @@ loginSubmit.addEventListener('click', (e) => {
                        if(!localStorage.getItem('id')){
                         localStorage.setItem('id',result.data.id);
                        }
-                       window.location.href = '../';
+                       window.location.href = '../main/main.html';
                    }
                    else{
                        if(result.error.includes('email')) emailError1();
