@@ -66,8 +66,8 @@ signinSubmit.addEventListener('click', (e) => {
                            if(!localStorage.getItem('id')){
                             localStorage.setItem('id',result.data.id);
                            }
-                        // window.location.href = '../main/main.html';
-                        window.location.href = '../';
+                           signin.classList.add('hidden');
+                           login.classList.remove('hidden');
                     }
                    }
                    else{
@@ -112,6 +112,7 @@ loginSubmit.addEventListener('click', (e) => {
                        if(!localStorage.getItem('id')){
                         localStorage.setItem('id',result.data.id);
                        }
+                       localStorage.setItem('time',new Date().getTime());
                     //    window.location.href = '../main/main.html';
                        window.location.href = '../';
                    }

@@ -8,6 +8,14 @@ let starId, user1Id, user2Id;
 let user_id, send_id;
 /*const starContainer = document.querySelector('.star-container');
 let containerStyle = window.getComputedStyle(starContainer);*/
+window.onload = function() {
+    if(localStorage.getItem('time')){
+        let newTime = new Date().getTime();
+        let oldTime = localStorage.getItem('time');
+        if((newTime-oldTime)/3600000>24) localStorage.clear();
+    }
+    
+};
 const myProfile = document.querySelector('.settings .profile');
 const appDes = document.querySelector('.app-des');
 const post = document.querySelector('.post');
